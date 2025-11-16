@@ -3,6 +3,8 @@ const express = require('express')
 const session = require('express-session')
 const { pool } = require('./src/db/pool')
 const passport = require('./src/auth/passport')
+const appRouter = require('./src/routes/appRouter')
+const path = require('path')
 const PORT = 3000
 
 const app = express()
@@ -21,6 +23,13 @@ app.use(session({
 }))
 
 app.use(passport.session())
+
+app.use(express.static(path.join(__dirname, "public")))
+
+app.set("views", path.join(__dirname, "src/views"));
+app.set("view engine", "ejs")
+
+app.use("/", appRouter)
 
 app.listen(PORT, (err) => {
     if (err) throw err;
