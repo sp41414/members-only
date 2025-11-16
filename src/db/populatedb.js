@@ -3,9 +3,9 @@ const { Pool } = require('pg')
 
 // source for sessions table: https://github.com/voxpelli/node-connect-pg-simple/blob/HEAD/table.sql
 const SQL = `
-    CREATE TABLE users (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, username VARCHAR, hash VARCHAR, salt VARCHAR, membership BOOLEAN, admin BOOLEAN)
+    CREATE TABLE users (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, username VARCHAR, hash VARCHAR, salt VARCHAR, membership BOOLEAN, admin BOOLEAN);
 
-    CREATE TABLE message (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, title VARCHAR, text VARCHAR, timestamp DATE, author VARCHAR, membership BOOLEAN)
+    CREATE TABLE message (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY, title VARCHAR, text VARCHAR, timestamp TIMESTAMP, author VARCHAR, membership BOOLEAN);
 
     CREATE TABLE "sessions" (
 	  "sid" varchar NOT NULL COLLATE "default",
