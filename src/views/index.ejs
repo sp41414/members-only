@@ -7,7 +7,15 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <% if (user && user.membership) {%>
+    <% if (user && user.admin) {%>
+    <nav>
+      <a href="/logout">Logout</a>
+      <a href="/message/new">Create Message</a>
+    </nav>
+    <main>
+      <h1 class="welcome">Welcome, <%= user.username %> (ADMIN)</h1>
+    </main>
+    <% } else if (user && user.membership) {%>
     <nav>
       <a href="/logout">Logout</a>
       <a href="/message/new">Create Message</a>

@@ -1,5 +1,6 @@
-require('dotenv').config()
-const { Pool } = require('pg')
+require("dotenv").config();
+const { Pool } = require("pg");
+const bcrypt = require("bcryptjs");
 
 // source for sessions table: https://github.com/voxpelli/node-connect-pg-simple/blob/HEAD/table.sql
 const SQL = `
@@ -19,20 +20,28 @@ const SQL = `
 	CREATE INDEX "IDX_session_expire" ON "sessions" ("expire");
 `;
 
+const adminUsername = process.env.ADMIN_USERNAME;
+const adminPassword = process.env.ADMIN_PASSWORD;
 
 async function main() {
-    const pool = new Pool({
-        connectionString: process.env.DBURL
-    })
-    const client = await pool.connect()
-    try {
-        await client.query(SQL)
-    } catch (err) {
-        console.error(err)
-    } finally {
-        client.release()
-        await pool.end()
-    }
+  const pool = new Pool({
+    connectionString: process.env.DBURL,
+  });
+  const client = await pool.connect();
+  const salt = await bcrypt.genSalt();
+  const password = await bcrypt.hash(adminPassword, salt);
+  try {
+    await client.query(SQL);
+    await client.query(
+      "INSERT INTO users (username, hash, salt, admin, membership) VALUES ($1, $2, $3, TRUE, TRUE)",
+      [adminUsername, password, salt]
+    );
+  } catch (err) {
+    console.error(err);
+  } finally {
+    client.release();
+    await pool.end();
+  }
 }
 
-main()
+main();
