@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <% if (user && user.membership) {%>
+    <nav>
+      <a href="/logout">Logout</a>
+      <a href="/message/new">Create Message</a>
+    </nav>
+    <main>
+      <h1 class="welcome">Welcome, <%= user.username %></h1>
+      <section>
+        <% memberShipMessages.forEach((message) => { %>
+        <div class="message">
+          <h1 class="title"><%= message.title %></h1>
+          <p><%= message.author %></p>
+          <p><%= message.timestamp.toISOString().split('T')[0]%></p>
+        </div>
+        <% }) %>
+      </section>
+    </main>
+    <% } else if (user) { %>
+    <nav>
+      <a href="/logout">Logout</a>
+      <a href="/message/new">Create Message</a>
+      <a href="/membership">Become A Member</a>
+    </nav>
+    <main>
+      <h1 class="welcome">Welcome, <%= user.username %></h1>
+      <section class="messages-user">
+        <% messages.forEach((message) => { %>
+        <div class="message">
+          <h1 class="title"><%= message.title %></h1>
+          <p><%= message.author %></p>
+          <p><%= message.timestamp.toISOString().split('T')[0] %></p>
+          <p><%= message.text %></p>
+        </div>
+        <% }) %>
+      </section>
+    </main>
+    <% } else { %>
+    <nav>
+      <a href="/login">Login</a>
+      <a href="/signup">Sign Up</a>
+    </nav>
+    <main>
+      <section class="messages-guest">
+        <% messages.forEach((message) => { %>
+        <div class="message">
+          <h1 class="title"><%= message.title %></h1>
+          <p><%= message.timestamp.toISOString().split('T')[0] %></p>
+          <p><%= message.text %></p>
+        </div>
+        <% }) %>
+      </section>
+    </main>
+    <% } %>
+  </body>
+</html>
