@@ -10,6 +10,7 @@ const signUpGet = (req, res) => {
 const homePage = async (req, res) => {
   const messages = await db.fetchMessages();
   const memberShipMessages = await db.fetchMembershipMessages();
+  const allMessagesAdmin = await db.fetchMessagesAdmin();
   console.log(messages);
   res.render("index", {
     title: "Members Only",

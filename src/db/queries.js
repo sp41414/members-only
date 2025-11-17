@@ -43,6 +43,11 @@ const updateMembership = async (id, membership) => {
   ]);
 };
 
+const fetchAllMessagesAdmin = async () => {
+  const { rows } = await pool.query("SELECT * FROM message ORDER BY timestamp");
+  return rows;
+};
+
 module.exports = {
   insertUser,
   checkUser,
@@ -50,4 +55,5 @@ module.exports = {
   fetchMembershipMessages,
   createMessage,
   updateMembership,
+  fetchAllMessagesAdmin,
 };
