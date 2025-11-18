@@ -250,3 +250,14 @@ form a:hover {
   color: white;
   transform: scale(1.1);
 }
+
+@media (max-width: 600px) {
+  nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .messages {
+    width: 80%;
+  }
+}
