@@ -11,7 +11,6 @@ const homePage = async (req, res) => {
   const messages = await db.fetchMessages();
   const memberShipMessages = await db.fetchMembershipMessages();
   const allMessagesAdmin = await db.fetchAllMessagesAdmin();
-  console.log(messages, memberShipMessages, allMessagesAdmin);
   res.render("index", {
     title: "Members Only",
     user: req.user,
