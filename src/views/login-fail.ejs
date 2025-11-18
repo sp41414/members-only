@@ -1,31 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>
-		<%=title%>
-	</title>
-</head>
-
-<body>
-	<nav>
-		<h1>
-			<%=title%>
-		</h1>
-	</nav>
-	<main>
-		<p>Login Failed: User doesn't exist, or incorrect username/password</p>
-		<form action="/login" method="POST">
-			<label for="username">Username:</label>
-			<input type="text" name="username" id="username" placeholder="Username" required>
-			<label for="password">Password:</label>
-			<input type="password" name="password" id="password" placeholder="Password" required>
-			<button type="submit">Submit</button>
-		</form>
-		<a href="signup">Sign up</a>
-	</main>
-</body>
-
+  <body>
+    <nav>
+      <h1><%=title%></h1>
+    </nav>
+    <main>
+      <ul class="errors">
+        <li>
+          Login Failed: User doesn't exist, or incorrect username/password
+        </li>
+      </ul>
+      <form action="/login" method="POST">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          placeholder="Username"
+          required
+        />
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Password"
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+      <a href="signup">Sign up</a>
+    </main>
+  </body>
 </html>

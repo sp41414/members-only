@@ -9,62 +9,174 @@
   <body>
     <% if (user && user.admin) {%>
     <nav>
-      <a href="/logout">Logout</a>
-      <a href="/message/new">Create Message</a>
+      <a href="/"><%= title %></a>
+      <div class="links">
+        <a href="/logout">Logout</a>
+        <a href="/message/new">Create Message</a>
+      </div>
     </nav>
     <main>
-      <h1 class="welcome">Welcome, <%= user.username %> (ADMIN)</h1>
+      <h1 class="welcome">
+        Welcome, <%= user.username %>
+        <svg
+          fill="#000000"
+          viewBox="0 0 1920 1920"
+          xmlns="http://www.w3.org/2000/svg"
+          class="admin-icon"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M276.941 440.584v565.722c0 422.4 374.174 625.468 674.71 788.668l8.02 4.292 8.131-4.292c300.537-163.2 674.71-366.268 674.71-788.668V440.584l-682.84-321.657L276.94 440.584Zm682.73 1479.529c-9.262 0-18.523-2.372-26.993-6.89l-34.9-18.974C588.095 1726.08 164 1495.906 164 1006.306V404.78c0-21.91 12.65-41.788 32.414-51.162L935.727 5.42c15.134-7.228 32.866-7.228 48 0l739.313 348.2c19.765 9.374 32.414 29.252 32.414 51.162v601.525c0 489.6-424.207 719.774-733.779 887.943l-34.899 18.975c-8.47 4.517-17.731 6.889-27.105 6.889Zm467.158-547.652h-313.412l-91.595-91.482v-83.803H905.041v-116.78h-83.69l-58.503-58.504c-1.92.113-3.84.113-5.76.113-176.075 0-319.285-143.21-319.285-319.285 0-176.075 143.21-319.398 319.285-319.398 176.075 0 319.285 143.323 319.285 319.398 0 1.92 0 3.84-.113 5.647l350.57 350.682v313.412Zm-266.654-112.941h153.713v-153.713L958.462 750.155l3.953-37.27c1.017-123.897-91.595-216.621-205.327-216.621S550.744 588.988 550.744 702.72c0 113.845 92.612 206.344 206.344 206.344l47.21-5.309 63.811 63.7h149.873v116.78h116.781v149.986l25.412 25.299Zm-313.4-553.57c0 46.758-37.949 84.706-84.706 84.706-46.758 0-84.706-37.948-84.706-84.706s37.948-84.706 84.706-84.706c46.757 0 84.706 37.948 84.706 84.706"
+              fill-rule="evenodd"
+            ></path>
+          </g>
+        </svg>
+      </h1>
+      <section>
+        <div class="messages">
+          <% if (allMessagesAdmin.length > 0) { %> <%
+          allMessagesAdmin.forEach((message) => { %>
+          <div class="message-container">
+            <div class="message-info">
+              <h1 class="title"><%= message.title %></h1>
+              <p class="author"><%= message.author %></p>
+              <p class="timestamp">
+                <%= message.timestamp.toISOString().split('T')[0] %>
+              </p>
+            </div>
+            <div class="message">
+              <p class="text"><%= message.text %></p>
+              <!-- TODO: Implement /message/delete and /message/update Routes -->
+              <div class="controls">
+                <a href="/message/delete/<%=message.id%>">Delete</a>
+                <a href="/message/update/<%=message.id%>">Update</a>
+              </div>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <h1>There are no messages here... Yet.</h1>
+          <% } %>
+        </div>
+      </section>
     </main>
     <% } else if (user && user.membership) {%>
     <nav>
-      <a href="/logout">Logout</a>
-      <a href="/message/new">Create Message</a>
+      <a href="/"><%= title %></a>
+      <div class="links">
+        <a href="/logout">Logout</a>
+        <a href="/message/new">Create Message</a>
+      </div>
     </nav>
     <main>
-      <h1 class="welcome">Welcome, <%= user.username %></h1>
+      <h1 class="welcome">
+        Welcome, <%= user.username %>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="member-icon"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M14.9999 15.2547C13.8661 14.4638 12.4872 14 10.9999 14C7.40399 14 4.44136 16.7114 4.04498 20.2013C4.01693 20.4483 4.0029 20.5718 4.05221 20.6911C4.09256 20.7886 4.1799 20.8864 4.2723 20.9375C4.38522 21 4.52346 21 4.79992 21H9.94465M13.9999 19.2857L15.7999 21L19.9999 17M14.9999 7C14.9999 9.20914 13.2091 11 10.9999 11C8.79078 11 6.99992 9.20914 6.99992 7C6.99992 4.79086 8.79078 3 10.9999 3C13.2091 3 14.9999 4.79086 14.9999 7Z"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></path>
+          </g>
+        </svg>
+      </h1>
       <section>
-        <% memberShipMessages.forEach((message) => { %>
-        <div class="message">
-          <h1 class="title"><%= message.title %></h1>
-          <p><%= message.author %></p>
-          <p><%= message.timestamp.toISOString().split('T')[0]%></p>
+        <div class="messages">
+          <% if (memberShipMessages.length > 0) { %> <%
+          memberShipMessages.forEach((message) => { %>
+          <div class="message-container">
+            <div class="message-info">
+              <h1 class="title"><%= message.title %></h1>
+              <p class="author"><%= message.author %></p>
+              <p class="timestamp">
+                <%= message.timestamp.toISOString().split('T')[0] %>
+              </p>
+            </div>
+            <div class="message">
+              <p><%= message.text %></p>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <h1>There are no messages here... Yet.</h1>
+          <% } %>
         </div>
-        <% }) %>
       </section>
     </main>
     <% } else if (user) { %>
     <nav>
-      <a href="/logout">Logout</a>
-      <a href="/message/new">Create Message</a>
-      <a href="/membership">Become A Member</a>
+      <a href="/"><%= title %></a>
+      <div class="links">
+        <a href="/logout">Logout</a>
+        <a href="/message/new">Create Message</a>
+        <a href="/membership">Become A Member</a>
+      </div>
     </nav>
     <main>
       <h1 class="welcome">Welcome, <%= user.username %></h1>
-      <section class="messages-user">
-        <% messages.forEach((message) => { %>
-        <div class="message">
-          <h1 class="title"><%= message.title %></h1>
-          <p><%= message.author %></p>
-          <p><%= message.timestamp.toISOString().split('T')[0] %></p>
-          <p><%= message.text %></p>
+      <section>
+        <div class="messages">
+          <% if (messages.length > 0) { %> <% messages.forEach((message) => { %>
+          <div class="message-container">
+            <div class="message-info">
+              <h1 class="title"><%= message.title %></h1>
+              <p class="author"><%= message.author %></p>
+              <p class="timestamp">
+                <%= message.timestamp.toISOString().split('T')[0] %>
+              </p>
+            </div>
+            <div class="message">
+              <p><%= message.text %></p>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <h1>There are no messages here... Yet.</h1>
+          <% } %>
         </div>
-        <% }) %>
       </section>
     </main>
     <% } else { %>
     <nav>
-      <a href="/login">Login</a>
-      <a href="/signup">Sign Up</a>
+      <a href="/"><%= title %></a>
+      <div class="links">
+        <a href="/login">Login</a>
+        <a href="/signup">Sign Up</a>
+      </div>
     </nav>
     <main>
-      <section class="messages-guest">
-        <% messages.forEach((message) => { %>
-        <div class="message">
-          <h1 class="title"><%= message.title %></h1>
-          <p><%= message.timestamp.toISOString().split('T')[0] %></p>
-          <p><%= message.text %></p>
+      <section>
+        <div class="messages">
+          <% if (messages.length > 0) { %> <% messages.forEach((message) => { %>
+          <div class="message-container">
+            <div class="message-info">
+              <h1 class="title"><%= message.title %></h1>
+            </div>
+            <div class="message">
+              <p><%= message.text %></p>
+            </div>
+          </div>
+          <% }) %> <% } else { %>
+          <h1>There are no messages here... Yet.</h1>
+          <% } %>
         </div>
-        <% }) %>
       </section>
     </main>
     <% } %>
