@@ -8,10 +8,14 @@
   </head>
   <body>
     <nav>
-      <a href="/">Home</a>
+      <a href="/"><%= title %></a>
+      <div class="links">
+        <a href="/logout">Logout</a>
+        <a href="/message/new">Create Message</a>
+        <a href="/membership">Become A Member</a>
+      </div>
     </nav>
     <main>
-      <h1><%= title %></h1>
       <%- include('errors') %>
       <form action="/membership" method="POST">
         <label for="password">Password:</label>

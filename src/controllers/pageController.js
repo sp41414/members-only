@@ -50,8 +50,8 @@ const membershipGet = (req, res) => {
 };
 
 const updateMessageGet = (req, res) => {
-  if (!req.user && !req.user.admin) {
-    res.redirect("/");
+  if (!req.user.admin) {
+    return res.redirect("/");
   }
   res.render("update", { title: "Update Message", id: req.params.id });
 };

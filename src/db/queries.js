@@ -48,6 +48,18 @@ const fetchAllMessagesAdmin = async () => {
   return rows;
 };
 
+const updateMessage = async (id, title, text) => {
+  await pool.query("UPDATE message SET title=$1, text=$2 WHERE id=$3", [
+    title,
+    text,
+    id,
+  ]);
+};
+
+const deleteMessage = async (id) => {
+  await pool.query("DELETE FROM message WHERE id=$1", [id]);
+};
+
 module.exports = {
   insertUser,
   checkUser,
@@ -56,4 +68,6 @@ module.exports = {
   createMessage,
   updateMembership,
   fetchAllMessagesAdmin,
+  updateMessage,
+  deleteMessage,
 };

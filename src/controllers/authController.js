@@ -155,9 +155,45 @@ const membershipPost = [
   },
 ];
 
-const deleteMessage = async (req, res) => {};
+const deleteMessage = async (req, res) => {
+  if (!req.user.admin) {
+    return res.redirect("/");
+  }
+  const id = req.params.id;
+  try {
+    await db.deleteMessage(id);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    res.redirect("/");
+  }
+};
 
-const updateMessage = async (req, res) => {};
+const updateMessage = [
+  validateMessage,
+  async (req, res) => {
+    if (!req.user.admin) {
+      return res.redirect("/");
+    }
+    const errors = validationResult(req);
+    const id = req.params.id;
+    if (!errors.isEmpty()) {
+      return res.render("update", {
+        title: "Update Message",
+        errors: errors.errors,
+        id: id,
+      });
+    }
+    const { title, text } = matchedData(req);
+    try {
+      await db.updateMessage(id, title, text);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      res.redirect("/");
+    }
+  },
+];
 
 module.exports = {
   signUpPost,
