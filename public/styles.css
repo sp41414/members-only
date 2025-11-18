@@ -136,6 +136,14 @@ section {
   flex-direction: column;
   gap: 0.6rem;
 }
+.message p {
+  margin: 0px;
+  line-height: 1.6;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
 .message-info .title {
   margin: 0;
   font-size: 1.2rem;
