@@ -49,6 +49,13 @@ const membershipGet = (req, res) => {
   res.render("member", { title: "Membership" });
 };
 
+const updateMessageGet = (req, res) => {
+  if (!req.user && !req.user.admin) {
+    res.redirect("/");
+  }
+  res.render("update", { title: "Update Message", id: req.params.id });
+};
+
 module.exports = {
   homePage,
   signUpGet,
@@ -56,4 +63,5 @@ module.exports = {
   loginFail,
   newMessageGet,
   membershipGet,
+  updateMessageGet,
 };

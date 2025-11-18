@@ -155,10 +155,16 @@ const membershipPost = [
   },
 ];
 
+const deleteMessage = async (req, res) => {};
+
+const updateMessage = async (req, res) => {};
+
 module.exports = {
   signUpPost,
   loginPost,
   logout,
   newMessagePost,
   membershipPost,
+  deleteMessage,
+  updateMessage,
 };

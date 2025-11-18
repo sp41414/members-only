@@ -184,17 +184,23 @@ form {
 label {
   font-weight: 600;
 }
-input {
+input,
+textarea {
   padding: 0.5rem 0.7rem;
   border-radius: 1rem;
   background-color: var(--secondary-bg);
   border: none;
   color: var(--primary-text);
-  transition: all 0.3s;
+  transition: transform 0.3s;
 }
-input:focus {
+input:focus,
+textarea:focus {
   transform: scale(1.05);
   border: 1px solid --border-color;
+}
+
+textarea {
+  resize: vertical;
 }
 
 button {

@@ -14,5 +14,8 @@ appRouter.get("/message/new", pageController.newMessageGet);
 appRouter.post("/message/new", authController.newMessagePost);
 appRouter.get("/membership", pageController.membershipGet);
 appRouter.post("/membership", authController.membershipPost);
+appRouter.get("/message/delete/:id", authController.deleteMessage);
+appRouter.get("/message/update/:id", pageController.updateMessageGet);
+appRouter.post("/message/update/:id", authController.updateMessage);
 
 module.exports = appRouter;

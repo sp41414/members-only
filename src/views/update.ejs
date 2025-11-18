@@ -16,7 +16,7 @@
     </nav>
     <main>
       <%- include('errors') %>
-      <form action="/message/new" method="POST">
+      <form action="/message/update/<%= id %>" method="POST">
         <label for="title">Title:</label>
         <input
           type="text"
@@ -32,7 +32,7 @@
           placeholder="Message"
           required
         ></textarea>
-        <button type="submit">Create Message</button>
+        <button type="submit">Update Message</button>
       </form>
     </main>
   </body>
